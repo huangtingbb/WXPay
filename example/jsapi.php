@@ -23,6 +23,8 @@ function printf_info($data)
     }
 }
 
+echo "123";
+
 //①、获取用户openid
 try{
 

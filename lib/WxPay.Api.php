@@ -59,6 +59,9 @@ class WxPayApi
 		$xml = $inputObj->ToXml();
 		
 		$startTimeStamp = self::getMillisecond();//请求开始时间
+        echo "<pre>";
+        print_r($config);
+        var_dump($xml);
 		$response = self::postXmlCurl($config, $xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($config, $response);
 		self::reportCostTime($config, $url, $startTimeStamp, $result);//上报请求花费时间
@@ -370,6 +373,7 @@ class WxPayApi
 		$inputObj->SetMch_id($config->GetMerchantId());//商户号
 		$inputObj->SetTime_stamp(time());//时间戳	 
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
+
 		
 		$inputObj->SetSign($config);//签名
 		
@@ -558,7 +562,7 @@ class WxPayApi
 			curl_setopt($ch,CURLOPT_PROXYPORT, $proxyPort);
 		}
 		curl_setopt($ch,CURLOPT_URL, $url);
-		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,TRUE);
+		curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
 		curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,2);//严格校验
 		curl_setopt($ch,CURLOPT_USERAGENT, $ua); 
 		//设置header

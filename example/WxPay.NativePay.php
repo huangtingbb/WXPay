@@ -65,7 +65,9 @@ class NativePay
 		{
 			try{
 				$config = new WxPayConfig();
+				var_dump(12);
 				$result = WxPayApi::unifiedOrder($config, $input);
+				var_dump(34);
 				return $result;
 			} catch(Exception $e) {
 				Log::ERROR(json_encode($e));
